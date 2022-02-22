@@ -1,0 +1,6 @@
+[commit]
+	gpgSign = true
+[core]
+	excludesfile = /Users/jeroen/.gitignore
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com
