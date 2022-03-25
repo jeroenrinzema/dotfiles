@@ -7,7 +7,7 @@ Small repository containing my personal dotfiles used local configurations.
 ```sh
 $ brew install go node helm
 $ brew install hyperkit minikube docker docker-compose
-$ brew install git neovim navi telnet wget curl gpg
+$ brew install fzf git neovim navi telnet wget curl gpg
 ```
 
 ## Minikube and docker
