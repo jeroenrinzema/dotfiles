@@ -1,0 +1,9 @@
+# Included on macOS only: commits are signed through 1Password, which holds the key.
+[user]
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEhvR5g+5+zQn7oqDgG0g1YaYMuL0DpShqt0ePbg45aH
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgSign = true

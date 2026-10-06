@@ -1,0 +1,15 @@
+# Global agent skills: <GitHub repository> <skill folder in that repository>.
+# install.sh copies each folder to ~/.agents/skills/<folder name>.
+emilkowalski/skills skills/animation-vocabulary
+emilkowalski/skills skills/apple-design
+emilkowalski/skills skills/emil-design-eng
+emilkowalski/skills skills/find-animation-opportunities
+emilkowalski/skills skills/improve-animations
+emilkowalski/skills skills/pick-ui-library
+emilkowalski/skills skills/prototype
+emilkowalski/skills skills/review-animations
+google-labs-code/stitch-skills plugins/stitch-utilities/skills/design-md
+jeroenrinzema/brainpod-skills skills/brainpod
+stablyai/orca skills/orca-cli
+stablyai/orca skills/orchestration
+vercel-labs/skills skills/find-skills

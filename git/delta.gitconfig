@@ -1,0 +1,7 @@
+# Included only where delta is installed; a missing pager breaks `git log`.
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true

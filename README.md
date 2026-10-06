@@ -1,22 +1,14 @@
-# Dotfiles
+# dotfiles
 
-Small repository containing my personal dotfiles used local configurations.
+Git, shell, [omp](https://omp.sh), and agent-skill setup for macOS and Linux.
 
-## Tooling and programming languages
-
-```sh
-$ brew install go node helm
-$ brew install hyperkit minikube docker docker-compose
-$ brew install fzf stern git neovim navi telnet wget curl gpg
+```shell
+./install.sh
 ```
 
-## Minikube and docker
+The script is safe to rerun. It links or includes files from this repository and moves an existing file aside once (`*.before-dotfiles`) instead of overwriting it. Coder runs it in new workspaces through the dotfiles module.
 
-```sh
-$ minikube start --mount --mount-string "/Users:/Users"
-$ # Setup docker to connect with minikube
-$ eval $(minikube docker-env)
-$ # Save the local docker ip to /etc/hosts
-$ echo "`minikube ip` docker.local" | sudo tee -a /etc/hosts > /dev/null
-```
-
+- `git/`: shared config, plus delta and 1Password signing where available.
+- `shell/common.sh`: aliases and `PATH`, sourced from `~/.bashrc` and `~/.zshrc`.
+- `omp/config.yml`: omp settings, linked to `~/.omp/agent/config.yml`. Logins are not stored here; run `omp login` once per machine.
+- `skills.txt`: global agent skills (repository and folder), copied to `~/.agents/skills` and linked for Claude Code. Skills you keep as symlinks to a local checkout are left alone.
