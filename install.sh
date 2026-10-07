@@ -52,6 +52,10 @@ for rc in "${HOME}/.bashrc" "${HOME}/.zshrc"; do
   fi
 done
 
+log "Bazel"
+# Registries every checkout needs, including worktrees without .bazelrc.user.
+link "${DOTFILES}/bazel/bazelrc" "${HOME}/.bazelrc"
+
 log "omp"
 if ! command -v omp >/dev/null 2>&1 && [ ! -x "${HOME}/.local/bin/omp" ]; then
   curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | sh -s -- --binary
