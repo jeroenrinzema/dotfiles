@@ -64,8 +64,10 @@ link "${DOTFILES}/omp/config.yml" "${HOME}/.omp/agent/config.yml"
 
 log "Skills"
 # Shallow-clone each repository once, copy each listed folder to ~/.agents/skills
-# (read by omp), and link it for Claude Code. A skill that is a symlink is left
-# alone: it points at a local checkout you are editing.
+# (read by omp), and link it for Claude Code. Installed skills are kept so a
+# rerun (Coder runs this on every start) stays fast; DOTFILES_UPDATE_SKILLS=1
+# refreshes them. A skill that is a symlink points at a local checkout you are
+# editing and is never touched.
 skills_tmp="$(mktemp -d)"
 trap 'rm -rf "${skills_tmp}"' EXIT
 mkdir -p "${HOME}/.agents/skills" "${HOME}/.claude/skills"
@@ -74,7 +76,9 @@ while read -r repo path; do
   name="$(basename "${path}")"
   dest="${HOME}/.agents/skills/${name}"
   if [ -L "${dest}" ]; then
-    echo "    ${name}: kept (symlink)"
+    continue
+  fi
+  if [ -d "${dest}" ] && [ "${DOTFILES_UPDATE_SKILLS:-0}" != 1 ]; then
     continue
   fi
   clone="${skills_tmp}/${repo//\//_}"
