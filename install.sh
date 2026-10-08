@@ -56,6 +56,17 @@ log "Bazel"
 # Registries every checkout needs, including worktrees without .bazelrc.user.
 link "${DOTFILES}/bazel/bazelrc" "${HOME}/.bazelrc"
 
+# Orca's SSH relay needs Node.js 18+ with npm and compiles node-pty (make, a
+# C++ compiler, python3). Only on Debian-like hosts with passwordless sudo, such
+# as dev containers; elsewhere install them yourself.
+orca_packages=(nodejs npm build-essential python3)
+if command -v apt-get >/dev/null 2>&1 && sudo -n true 2>/dev/null &&
+  ! dpkg -s "${orca_packages[@]}" >/dev/null 2>&1; then
+  log "Orca relay packages"
+  sudo apt-get update -qq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq "${orca_packages[@]}"
+fi
+
 log "omp"
 if ! command -v omp >/dev/null 2>&1 && [ ! -x "${HOME}/.local/bin/omp" ]; then
   curl -fsSL https://raw.githubusercontent.com/can1357/oh-my-pi/main/scripts/install.sh | sh -s -- --binary
