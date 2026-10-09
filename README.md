@@ -13,3 +13,4 @@ The script is safe to rerun. It links or includes files from this repository and
 - `omp/config.yml`: omp settings, linked to `~/.omp/agent/config.yml`. Logins are not stored here; run `omp login` once per machine.
 - `bazel/bazelrc`: Bazel module registries (Bazel Central Registry and brainhive), linked to `~/.bazelrc`.
 - `skills.txt`: global agent skills (repository and folder), copied to `~/.agents/skills` and linked for Claude Code. Installed skills are kept on reruns; `DOTFILES_UPDATE_SKILLS=1 ./install.sh` refreshes them. Skills you keep as symlinks to a local checkout are left alone.
+  Includes [HyperFrames](https://github.com/heygen-com/hyperframes/tree/main/skills/hyperframes), the video-creation router; it installs specialized workflows on demand.

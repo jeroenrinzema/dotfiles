@@ -4,3 +4,4 @@ brainpodnl/skills skills/brainpod
 pbakaus/impeccable .agents/skills/impeccable
 stablyai/orca skills/orca-cli
 stablyai/orca skills/orchestration
+heygen-com/hyperframes skills/hyperframes
