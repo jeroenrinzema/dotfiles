@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Set up git, the shell, omp, and agent skills on macOS or Linux. Safe to rerun.
+# Set up git, GitHub CLI, the shell, omp, and agent skills on macOS or Linux. Safe to rerun.
 # Coder's dotfiles module runs this in new workspaces; elsewhere run ./install.sh.
 set -euo pipefail
 
@@ -38,6 +38,18 @@ fi
 git config --global core.excludesFile "${DOTFILES}/git/ignore"
 if command -v git-lfs >/dev/null 2>&1; then
   git lfs install --skip-repo >/dev/null
+fi
+
+log "GitHub CLI"
+if ! command -v gh >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    brew install gh
+  elif command -v apt-get >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+    sudo apt-get update -qq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq gh
+  else
+    log "Install gh manually: https://cli.github.com/"
+  fi
 fi
 
 log "Shell"
