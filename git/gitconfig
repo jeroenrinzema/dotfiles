@@ -1,6 +1,14 @@
 [user]
 	name = Jeroen Rinzema
 	email = jeroen@rinzema.dev
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEhvR5g+5+zQn7oqDgG0g1YaYMuL0DpShqt0ePbg45aH
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	# Linux/Coder uses the key from SSH_AUTH_SOCK; macOS overrides the signer.
+	program = ssh-keygen
+[commit]
+	gpgSign = true
 [init]
 	defaultBranch = main
 [push]
