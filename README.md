@@ -40,8 +40,10 @@ For example, `brainpod.brainpod` is the brainpod devcontainer. In that session, 
 For OpenSSH or an SSH-based desktop IDE, configure forwarding on your Mac:
 
 ```shell
-coder config-ssh --use-previous-options -o ForwardAgent=yes
+coder config-ssh --yes -o ForwardAgent=yes
 ```
+
+This replaces the saved `config-ssh` options; pass any other custom `-o` options you need in the same command. Do not use `--use-previous-options` when first enabling forwarding: it can keep the old options instead of applying the new one.
 
 Ensure `~/.ssh/config` selects the 1Password agent for Coder hosts. Keep this block outside Coder's managed section and before any broader `Host *` defaults:
 
@@ -49,6 +51,8 @@ Ensure `~/.ssh/config` selects the 1Password agent for Coder hosts. Keep this bl
 Host coder.* *.coder
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 ```
+
+In Orca, use the Coder SSH host for the devcontainer (for example, `brainpod.brainpod.me.coder`). Reconnect an already-open Coder connection after changing the SSH options, then open a fresh terminal and check `ssh-add -l` there. Existing connections and terminals do not automatically acquire the forwarded socket.
 
 Forward only to trusted workspaces: processes running as your remote user can request use of the forwarded keys. Forwarding lasts for the connection and is not automatically available in Coder browser terminals, background jobs, or unrelated sessions. Without the signing key, commits fail rather than silently becoming unsigned.
 
