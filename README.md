@@ -52,7 +52,9 @@ Host coder.* *.coder
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 ```
 
-In Orca, use the Coder SSH host for the devcontainer (for example, `brainpod.brainpod.me.coder`). Reconnect an already-open Coder connection after changing the SSH options, then open a fresh terminal and check `ssh-add -l` there. Existing connections and terminals do not automatically acquire the forwarded socket.
+Orca caveat: native remote terminals inherit the detached relay's environment, not the environment of a new OpenSSH login. On the installed build, a relay started without `SSH_AUTH_SOCK` continued creating terminals without an agent even after reconnecting. A reconnect alone is therefore not a reliable fix; native terminals need agent-socket propagation through the relay.
+
+For signing now, open a normal SSH session from your Mac, for example `ssh brainpod.brainpod.me.coder`, and run Git commands there. Signing through that exact host has been verified with the configured 1Password key. Do not restart the detached relay automatically: it owns running remote terminals and agents.
 
 Forward only to trusted workspaces: processes running as your remote user can request use of the forwarded keys. Forwarding lasts for the connection and is not automatically available in Coder browser terminals, background jobs, or unrelated sessions. Without the signing key, commits fail rather than silently becoming unsigned.
 
